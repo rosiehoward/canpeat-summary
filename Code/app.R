@@ -142,9 +142,9 @@ ui <- fluidPage(theme = shinytheme("flatly"),
     fluidRow(column(12,
                     tags$footer(
                       p(
-                        "The data presented here were gathered from the ",
+                        "The data presented here were gathered from directly from PIs or from the ",
                         tags$a(href = 'https://ameriflux.lbl.gov/sites/site-search/#', 'AmeriFlux Site Search'),
-                        " table on January 16, 2024."
+                        " table February 2025."
                       ), 
                       class = "footer"
                     )
@@ -163,11 +163,11 @@ server <- function(input, output) {
     output$Map <- renderLeaflet({
       
       leaflet(sites %>% 
-                distinct(`Site ID`, `Site Name`, `Lat`, `Long`),
+                distinct(`Site ID`, `Site Name`, `Lat (deg)`, `Lon (deg)`),
               options = leafletOptions(scrollWheelZoom = FALSE)) %>% 
         addTiles() %>%
-        addMarkers(lng = ~`Long`, 
-                   lat = ~`Lat`, 
+        addMarkers(lng = ~`Lon (deg)`, 
+                   lat = ~`Lat (deg)`, 
                    label = lapply(labs, htmltools::HTML),
                    clusterOptions = markerClusterOptions()
                    )
@@ -178,7 +178,7 @@ server <- function(input, output) {
     # Start create CanPeat_Table table
     output$CanPeat_Table <- DT::renderDataTable({
       CanPeat_Table_DT_object <- sites %>% 
-        select(`Site ID`, `Site Name`,`Lat`,`Long`,`Principal Investigator`)
+        select(`Site ID`, `Site Name`,`Lat (deg)`,`Lon (deg)`,`Principal Investigator`)
         # select(`Site ID`, Name, `Principal Investigator`, `Site Start`, `Site End`, `AmeriFlux BASE Data`, `AmeriFlux FLUXNET Data`)
       # DT info: https://datatables.net/reference/option/dom https://rstudio.github.io/DT/
       datatable(
