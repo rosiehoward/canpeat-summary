@@ -126,7 +126,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                  ), # End fluidrow
                  fluidRow(column(12, 
                                  wellPanel(
-                                   leafletOutput(outputId = "Map",height=500)
+                                   leafletOutput(outputId = "Map",height = 600,width = 1050)
                                  )
                  ) # End wellPanel
                  ), # End fluidrow
@@ -147,9 +147,9 @@ ui <- fluidPage(theme = shinytheme("flatly"),
     fluidRow(column(12,
                     tags$footer(
                       p(
-                        "The data presented here were gathered from directly from PIs or from the ",
-                        tags$a(href = 'https://ameriflux.lbl.gov/sites/site-search/#', 'AmeriFlux Site Search'),
-                        " table February 2025."
+                        "The data presented here were gathered from directly from PIs, Data Managers, or from the ",
+                        tags$a(href = 'https://ameriflux.lbl.gov/sites/site-search/#', 'AmeriFlux Site Search', target="_blank"),
+                        " in February 2025."
                       ), 
                       class = "footer"
                     )
