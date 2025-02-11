@@ -51,7 +51,7 @@ sites <- sites |>
 
 # Assign variables for use within a text block
 total_sites <- sites |> 
-  summarise(x = n_distinct(`Site ID`)) |> 
+  summarise(x = n_distinct(`Site Name`)) |> 
   pull()
 
 # total_sites_no_end <- sites |> 
@@ -75,22 +75,27 @@ labs <- lapply(seq(nrow(sites)), function(i) {
           sites[i, "Site ID"], 
           '<br><b>Site Name:</b> ', 
           sites[i, "Site Name"],
+           '<br><b>Lat (deg):</b> ', 
+          sites[i, "Lat (deg)"],
+           '<br><b>Lon (deg):</b> ', 
+          sites[i, "Lon (deg)"],
+           '<br><b>Elev (m):</b> ', 
+          sites[i, "Elevation (m)"],
+           '<br><b>Clean Data:</b> ', 
+          sites[i, "Years of Clean Data"],
           '<br><b>PI:</b> ', 
           sites[i, "Principal Investigator"])
 })
 
-# labs <- lapply(seq(nrow(sites)), function(i) {
-#   paste0('<b>Site ID:</b> ', 
-#           sites[i, "Site ID"], 
-#           '<br><b>Site Name:</b> ', 
-#           sites[i, "Name"],
-#           '<br><b>PI:</b> ', 
-#           sites[i, "Principal Investigator"],
-#           '<br><b>Site Start Year:</b> ', 
-#           sites[i, "Site Start"], 
-#           '<br><b>Site End Year:</b> ', 
-#           sites[i, "Site End"]) 
-# })
+# colour palette for site markers on map
+# pal <- colorFactor(
+#   # Use a predefined palette:
+#   # palette = "Dark2",
+#   # 
+#   # Or specify individual colors:
+#   palette = c("purple", "orange"),
+#   domain = sites
+# )
 
 # Define UI for application
 
@@ -121,7 +126,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                  ), # End fluidrow
                  fluidRow(column(12, 
                                  wellPanel(
-                                   leafletOutput(outputId = "Map")
+                                   leafletOutput(outputId = "Map",height=500)
                                  )
                  ) # End wellPanel
                  ), # End fluidrow
@@ -164,7 +169,8 @@ server <- function(input, output) {
       
       leaflet(sites %>% 
                 distinct(`Site ID`, `Site Name`, `Lat (deg)`, `Lon (deg)`),
-              options = leafletOptions(scrollWheelZoom = FALSE)) %>% 
+              options = leafletOptions(scrollWheelZoom = TRUE)) %>% 
+              # options = leafletOptions(scrollWheelZoom = FALSE)) %>% 
         addTiles() %>%
         addMarkers(lng = ~`Lon (deg)`, 
                    lat = ~`Lat (deg)`, 
@@ -178,7 +184,7 @@ server <- function(input, output) {
     # Start create CanPeat_Table table
     output$CanPeat_Table <- DT::renderDataTable({
       CanPeat_Table_DT_object <- sites %>% 
-        select(`Site ID`, `Site Name`,`Lat (deg)`,`Lon (deg)`,`Principal Investigator`)
+        select(`Site ID`, `Site Name`,`Lat (deg)`,`Lon (deg)`,`Elevation (m)`,`Principal Investigator`)
         # select(`Site ID`, Name, `Principal Investigator`, `Site Start`, `Site End`, `AmeriFlux BASE Data`, `AmeriFlux FLUXNET Data`)
       # DT info: https://datatables.net/reference/option/dom https://rstudio.github.io/DT/
       datatable(
