@@ -102,7 +102,8 @@ labs <- lapply(seq(nrow(sites)), function(i) {
 ui <- fluidPage(theme = shinytheme("flatly"),
 
     # Application title
-    titlePanel("Can-Peat Flux Sites"),
+    titlePanel(div("Can-Peat Flux Sites", style = "background-color: #f2f2f2")),
+    #titlePanel("Can-Peat Flux Sites"),
 
         mainPanel(fluidRow(column(12,
                                   h2("Summary"),
@@ -111,7 +112,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
         ),# End fluidrow 
         fluidRow(br()),# End fluidrow 
         fluidRow(column(12,
-                p(paste0("Sample of ", total_sites, " peatland sites for which data is being collected and cleaned using the EcoFlux Lab's data cleaning pipeline. These represent Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. Further sites will be added as data is collected and cleaned.")),
+                p(paste0("Sample of ", total_sites, " peatland sites for which data is being collected and cleaned using the EcoFlux Lab's data cleaning pipeline. This sample represents Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. Further sites will be added as data is collected and cleaned.")),
                         
         )
         # fluidRow(column(12,
@@ -149,7 +150,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                       p(
                         "The data presented here were gathered from directly from PIs, Data Managers, or from the ",
                         tags$a(href = 'https://ameriflux.lbl.gov/sites/site-search/#', 'AmeriFlux Site Search', target="_blank"),
-                        " in February 2025."
+                        " in February 2025. Page based on code from https://github.com/norlab/ameriflux-analysis."
                       ), 
                       class = "footer"
                     )
