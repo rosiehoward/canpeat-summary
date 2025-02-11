@@ -36,16 +36,17 @@ rowCallback <- c(
 # End define rowCallback function
 
 # Read in dataset
-sites <- read_tsv(file = "https://raw.githubusercontent.com/norlab/ameriflux-analysis/main/Data/AmeriFlux-sites-202401161213.tsv", show_col_types = FALSE)
+sites <- read_tsv(file = "https://raw.githubusercontent.com/rosiehoward/canpeat-summary/main/Data/CanPeat-TSV.tsv", show_col_types = FALSE)
+#sites <- read_tsv(file = "https://raw.githubusercontent.com/norlab/ameriflux-analysis/main/Data/AmeriFlux-sites-202401161213.tsv", show_col_types = FALSE)
 
 # Filter to just sites in Canada
 sites <- sites |> 
   filter(Country == 'Canada') 
 
 # Add some new columns
-sites <- sites |> 
-  mutate(first_year_of_data = str_split(`Years of AmeriFlux BASE Data`, ",", simplify = TRUE)[ , 1]) |> 
-  mutate(last_year_of_data = str_split(`Years of AmeriFlux BASE Data`, ",", simplify = TRUE)[ , -1])
+#sites <- sites |> 
+#  mutate(first_year_of_data = str_split(`Years of AmeriFlux BASE Data`, ",", simplify = TRUE)[ , 1]) |> 
+#  mutate(last_year_of_data = str_split(`Years of AmeriFlux BASE Data`, ",", simplify = TRUE)[ , -1])
 
 
 # Assign variables for use within a text block
@@ -75,19 +76,28 @@ labs <- lapply(seq(nrow(sites)), function(i) {
           '<br><b>Site Name:</b> ', 
           sites[i, "Name"],
           '<br><b>PI:</b> ', 
-          sites[i, "Principal Investigator"],
-          '<br><b>Site Start Year:</b> ', 
-          sites[i, "Site Start"], 
-          '<br><b>Site End Year:</b> ', 
-          sites[i, "Site End"]) 
+          sites[i, "Principal Investigator"])
 })
+
+# labs <- lapply(seq(nrow(sites)), function(i) {
+#   paste0('<b>Site ID:</b> ', 
+#           sites[i, "Site ID"], 
+#           '<br><b>Site Name:</b> ', 
+#           sites[i, "Name"],
+#           '<br><b>PI:</b> ', 
+#           sites[i, "Principal Investigator"],
+#           '<br><b>Site Start Year:</b> ', 
+#           sites[i, "Site Start"], 
+#           '<br><b>Site End Year:</b> ', 
+#           sites[i, "Site End"]) 
+# })
 
 # Define UI for application
 
 ui <- fluidPage(theme = shinytheme("flatly"),
 
     # Application title
-    titlePanel("Canadian Eddy-Covariance Research Sites Registered on AmeriFlux"),
+    titlePanel("Can-Peat Flux Sites"),
 
         mainPanel(fluidRow(column(12,
                                   h2("Summary"),
@@ -96,9 +106,13 @@ ui <- fluidPage(theme = shinytheme("flatly"),
         ),# End fluidrow 
         fluidRow(br()),# End fluidrow 
         fluidRow(column(12,
-                        p(paste0("As of January 16, 2024, AmeriFlux listed ", total_sites, " unique Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. If we exclude research sites that have ended, there are currently ", total_sites_no_end, " active Canadian research sites associated with ", total_pi_no_end, " Principal Investigators.")),
+                p(paste0("Sample of ", total_sites, " peatland sites for which data will be collected and cleaned using the EcoFlux Lab's data cleaning pipeline. These represent Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. Further sites will be added as data is collected and cleaned.")),
                         
         )
+        # fluidRow(column(12,
+        #                 p(paste0("As of January 16, 2024, AmeriFlux listed ", total_sites, " unique Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. If we exclude research sites that have ended, there are currently ", total_sites_no_end, " active Canadian research sites associated with ", total_pi_no_end, " Principal Investigators.")),
+                        
+        # )
         ),# End fluidrow 
                  fluidRow(column(8,
                                  h2("Map View")
@@ -117,7 +131,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                  column(4)
                  ), # End fluidrow
                  fluidRow(column(12,
-                                 DT::dataTableOutput(outputId = "Ameriflux_Table")
+                                 DT::dataTableOutput(outputId = "CanPeat_Table")
                  )
                  ) # End fluidRow
         ),
@@ -161,13 +175,14 @@ server <- function(input, output) {
     })
     # End Create NY5Z map
     
-    # Start create Ameriflux_Table table
-    output$Ameriflux_Table <- DT::renderDataTable({
-      Ameriflux_Table_DT_object <- sites %>% 
-        select(`Site ID`, Name, `Principal Investigator`, `Site Start`, `Site End`, `AmeriFlux BASE Data`, `AmeriFlux FLUXNET Data`)
+    # Start create CanPeat_Table table
+    output$CanPeat_Table <- DT::renderDataTable({
+      CanPeat_Table_DT_object <- sites %>% 
+        select(`Site ID`, `Site Name`,`Lat`,`Long`,`Principal Investigator`)
+        # select(`Site ID`, Name, `Principal Investigator`, `Site Start`, `Site End`, `AmeriFlux BASE Data`, `AmeriFlux FLUXNET Data`)
       # DT info: https://datatables.net/reference/option/dom https://rstudio.github.io/DT/
       datatable(
-        Ameriflux_Table_DT_object,
+        CanPeat_Table_DT_object,
         #caption = 'E-Rate commitments made to Libraries and Library Systems including those applying as part of a Consortium or as a Non-Instructional Facility. State populations are retrieved from the US Census Bureau Population Estimates API and are specific to the year chosen. There are currently no 2021 or 2022 state population estimates and thus no 2021 or 2022 per capita commitments.',
         rownames = F,
         # bootstrap style must be added when using a shinytheme https://stackoverflow.com/a/60948767
@@ -199,7 +214,7 @@ server <- function(input, output) {
       #   ) %>%
       #   formatPercentage("Pct_of_Lib_Funding", 2)
     })
-    # End create Ameriflux_Table table
+    # End create CanPeat_Table table
 }
 
 # Run the application 
