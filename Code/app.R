@@ -36,7 +36,7 @@ rowCallback <- c(
 # End define rowCallback function
 
 # Read in dataset
-sites <- read_tsv(file = "https://raw.githubusercontent.com/rosiehoward/canpeat-summary/main/Data/CanPeat-TSV.tsv", show_col_types = FALSE)
+sites <- read_tsv(file = "https://raw.githubusercontent.com/rosiehoward/canpeat-summary/refs/heads/main/Data/CanPeat-TSV.tsv", show_col_types = FALSE)
 #sites <- read_tsv(file = "https://raw.githubusercontent.com/norlab/ameriflux-analysis/main/Data/AmeriFlux-sites-202401161213.tsv", show_col_types = FALSE)
 
 # Filter to just sites in Canada
@@ -54,19 +54,19 @@ total_sites <- sites |>
   summarise(x = n_distinct(`Site ID`)) |> 
   pull()
 
-total_sites_no_end <- sites |> 
-  filter(is.na(`Site End`) | as.numeric(`Site End`) > 2023) |> 
-  summarise(x = n_distinct(`Site ID`)) |> 
-  pull()
+# total_sites_no_end <- sites |> 
+  # filter(is.na(`Site End`) | as.numeric(`Site End`) > 2023) |> 
+  # summarise(x = n_distinct(`Site ID`)) |> 
+  # pull()
 
 total_pi <- sites |> 
   summarise(x = n_distinct(`Principal Investigator`)) |> 
   pull()
 
-total_pi_no_end <- sites |> 
-  filter(is.na(`Site End`) | as.numeric(`Site End`) > 2023) |> 
-  summarise(x = n_distinct(`Principal Investigator`)) |> 
-  pull()
+# total_pi_no_end <- sites |> 
+  # filter(is.na(`Site End`) | as.numeric(`Site End`) > 2023) |> 
+  # summarise(x = n_distinct(`Principal Investigator`)) |> 
+  # pull()
 
 # Define the labels for the leaflet map
 # See https://stackoverflow.com/a/43155126
@@ -74,7 +74,7 @@ labs <- lapply(seq(nrow(sites)), function(i) {
   paste0('<b>Site ID:</b> ', 
           sites[i, "Site ID"], 
           '<br><b>Site Name:</b> ', 
-          sites[i, "Name"],
+          sites[i, "Site Name"],
           '<br><b>PI:</b> ', 
           sites[i, "Principal Investigator"])
 })
@@ -106,7 +106,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
         ),# End fluidrow 
         fluidRow(br()),# End fluidrow 
         fluidRow(column(12,
-                p(paste0("Sample of ", total_sites, " peatland sites for which data will be collected and cleaned using the EcoFlux Lab's data cleaning pipeline. These represent Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. Further sites will be added as data is collected and cleaned.")),
+                p(paste0("Sample of ", total_sites, " peatland sites for which data is being collected and cleaned using the EcoFlux Lab's data cleaning pipeline. These represent Eddy-Covariance research sites across Canada associated with ", total_pi, " Principal Investigators. Further sites will be added as data is collected and cleaned.")),
                         
         )
         # fluidRow(column(12,
@@ -163,11 +163,11 @@ server <- function(input, output) {
     output$Map <- renderLeaflet({
       
       leaflet(sites %>% 
-                distinct(`Site ID`, Name, `Longitude (degrees)`, `Latitude (degrees)`),
+                distinct(`Site ID`, `Site Name`, `Lat`, `Long`),
               options = leafletOptions(scrollWheelZoom = FALSE)) %>% 
         addTiles() %>%
-        addMarkers(lng = ~`Longitude (degrees)`, 
-                   lat = ~`Latitude (degrees)`, 
+        addMarkers(lng = ~`Long`, 
+                   lat = ~`Lat`, 
                    label = lapply(labs, htmltools::HTML),
                    clusterOptions = markerClusterOptions()
                    )
