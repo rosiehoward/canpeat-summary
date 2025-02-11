@@ -1,15 +1,15 @@
-Site ID	Site Name	Link	Lat (deg)	Lon (deg)    Elevation (m)	Country	Principal Investigator
-CA-DBB	Delta Burns Bog	https://ameriflux.lbl.gov/sites/siteinfo/CA-DBB	49.1293	-122.9849   4	Canada	Sara Knox
-CA-HPC	Havikpak Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-HPC	68.3203	-133.5188   80	Canada	Oliver Sonnentag
-CA-KLP	Kinoje Lake Peatland	https://ameriflux.lbl.gov/sites/siteinfo/CA-KLP	51.5902	-81.7684    71	Canada	Elyn Humphreys
-CA-Mer	"Ontario - Eastern Peatland, Mer Bleue"	https://ameriflux.lbl.gov/sites/siteinfo/CA-Mer	45.4094	-75.5186    70	Canada	Elyn Humphreys
-CA-RPn	Robinsons_Natural_Bog_NL	https://ameriflux.lbl.gov/sites/siteinfo/CA-RPn	48.2604	-58.6632    150	Canada	Jianghua Wu
-CA-RPp	Robinsons_Peatland_Pasture_NL	https://ameriflux.lbl.gov/sites/siteinfo/CA-RPp	48.2632	-58.6670    162	Canada	Jianghua Wu
-CA-SCB	Scotty Creek Bog	https://ameriflux.lbl.gov/sites/siteinfo/CA-SCB	61.3089	-121.2984   280	Canada	Oliver Sonnentag
-CA-SCC	Scotty Creek Landscape	https://ameriflux.lbl.gov/sites/siteinfo/CA-SCC	61.3079	-121.2992   285	Canada	Oliver Sonnentag
-CA-SMC	Smith Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-SMC	63.1534	-123.2522   150	Canada	Oliver Sonnentag
-CA-TVC	Trail Valley Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-TVC	68.7462	-133.5017   85	Canada	Oliver Sonnentag
-NA  Sibbald Fen NA  51.0600 -114.87 1490 Canada  Rich Petrone
-CA-LUT	Lutose	NA	59.440578	-117.2426   NA	Canada	David Olefeldt
-CA-STR	Steen River	NA	59.595027	-117.2862   NA	Canada	David Olefeldt
-NA	Finn’s Fen	NA	59.261048	-117.4205   NA	Canada	David Olefeldt
+Site ID	Site Name	Link	Lat (deg)	Lon (deg)	Elevation (m)	Country	Principal Investigator
+CA-DBB	Delta Burns Bog	https://ameriflux.lbl.gov/sites/siteinfo/CA-DBB	49.1293	-122.9849	4	Canada	Sara Knox
+CA-HPC	Havikpak Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-HPC	68.3203	-133.5188	80	Canada	Oliver Sonnentag
+CA-KLP	Kinoje Lake Peatland	https://ameriflux.lbl.gov/sites/siteinfo/CA-KLP	51.5902	-81.7684	71	Canada	Elyn Humphreys
+CA-Mer	"Ontario - Eastern Peatland, Mer Bleue"	https://ameriflux.lbl.gov/sites/siteinfo/CA-Mer	45.4094	-75.5186	70	Canada	Elyn Humphreys
+CA-RPn	Robinsons_Natural_Bog_NL	https://ameriflux.lbl.gov/sites/siteinfo/CA-RPn	48.2604	-58.6632	150	Canada	Jianghua Wu
+CA-RPp	Robinsons_Peatland_Pasture_NL	https://ameriflux.lbl.gov/sites/siteinfo/CA-RPp	48.2632	-58.6670	162	Canada	Jianghua Wu
+CA-SCB	Scotty Creek Bog	https://ameriflux.lbl.gov/sites/siteinfo/CA-SCB	61.3089	-121.2984	280	Canada	Oliver Sonnentag
+CA-SCC	Scotty Creek Landscape	https://ameriflux.lbl.gov/sites/siteinfo/CA-SCC	61.3079	-121.2992	285	Canada	Oliver Sonnentag
+CA-SMC	Smith Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-SMC	63.1534	-123.2522	150	Canada	Oliver Sonnentag
+CA-TVC	Trail Valley Creek	https://ameriflux.lbl.gov/sites/siteinfo/CA-TVC	68.7462	-133.5017	85	Canada	Oliver Sonnentag
+NA	Sibbald Fen	NA	51.0600	-114.87	1490	Canada	Rich Petrone
+CA-LUT	Lutose	NA	59.440578	-117.2426	NA	Canada	David Olefeldt
+CA-STR	Steen River	NA	59.595027	-117.2862	NA	Canada	David Olefeldt
+NA	Finn’s Fen	NA	59.261048	-117.4205	NA	Canada	David Olefeldt
