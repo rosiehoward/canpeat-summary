@@ -102,10 +102,12 @@ labs <- lapply(seq(nrow(sites)), function(i) {
 ui <- fluidPage(theme = shinytheme("flatly"),
 
     # Application title
-    titlePanel(div("Can-Peat Flux Sites", style = "background-color: #f2f2f2")),
-    #titlePanel("Can-Peat Flux Sites"),
+    #titlePanel(div("Can-Peat Flux Sites", style = "background-color: #f2f2f2")),
+    titlePanel("Can-Peat Flux Sites"),
 
-        mainPanel(fluidRow(column(12,
+        mainPanel(
+          
+          fluidRow(column(12,
                                   h2("Summary"),
                                   
         )
