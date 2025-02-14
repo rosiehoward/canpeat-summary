@@ -38,7 +38,7 @@ rowCallback <- c(
 # Read in datasets
 
 # need to somehow read this in...
-load("/Users/rosie/Documents/Micromet/CanPeat/sites/DataForViz/data_tmp/all_data.RData")  # code must have been run first to create this data set
+load("/Users/rosie/Documents/Micromet/CanPeat/sites/canpeat-summary/Data/data_tmp/all_data.RData")  # code must have been run first to create this data set
 
 # ***Eventually site list from loaded data above and site list from Site Information page (tsv file) will match!***
 # Temporary solution: rename map sites as sites_map so previous site list is not overwritten
